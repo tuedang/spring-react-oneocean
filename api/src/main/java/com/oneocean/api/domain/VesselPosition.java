@@ -12,6 +12,8 @@ import java.time.Instant;
 @Getter
 @Setter
 public class VesselPosition implements Comparable<VesselPosition> {
+    private static final double VESSEL_SIZE_ON_COORDINATE = 0.01;
+
     private Instant time;
     private Vessel vessel;
     private Position position;
@@ -58,5 +60,9 @@ public class VesselPosition implements Comparable<VesselPosition> {
                 .time(atTime)
                 .vessel(vessel)
                 .build();
+    }
+
+    public boolean isIntersectWith(VesselPosition with) {
+        return distanceTo(with) < (VESSEL_SIZE_ON_COORDINATE * 2);
     }
 }

@@ -64,4 +64,22 @@ public class VesselPositionTest {
         VesselPosition atPosition3H = vesselPosition1.atTime(vesselPosition2, atTimeAfter3H);
         assertThat(atPosition3H).isNull();
     }
+
+    @Test
+    public void testIntersectWith() {
+        assertThat(vesselPosition1.isIntersectWith(vesselPosition1)).isTrue();
+        assertThat(vesselPosition2.isIntersectWith(vesselPosition2)).isTrue();
+
+        assertThat(vesselPosition1.isIntersectWith(vesselPosition2)).isFalse();
+
+        // Assume it's too close for a collision
+        Instant atTime = vesselPosition1.getTime().plus(10, ChronoUnit.SECONDS);
+        VesselPosition vesselPosition = vesselPosition1.atTime(vesselPosition2, atTime);
+        assertThat(vesselPosition1.isIntersectWith(vesselPosition)).isTrue();
+
+        // Far enough for a collision
+        Instant atTime100Sec = vesselPosition1.getTime().plus(100, ChronoUnit.SECONDS);
+        VesselPosition vesselPositionAfter100Sec = vesselPosition1.atTime(vesselPosition2, atTime100Sec);
+        assertThat(vesselPosition1.isIntersectWith(vesselPositionAfter100Sec)).isFalse();
+    }
 }
