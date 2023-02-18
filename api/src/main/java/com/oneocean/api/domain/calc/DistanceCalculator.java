@@ -20,10 +20,10 @@ public class DistanceCalculator {
     }
 
     public double distance(VesselPosition vesselPosition1, VesselPosition vesselPosition2) {
-        int y2 = vesselPosition2.getPosition().getY();
-        int x2 = vesselPosition2.getPosition().getX();
-        int y1 = vesselPosition1.getPosition().getY();
-        int x1 = vesselPosition1.getPosition().getX();
+        double y2 = vesselPosition2.getPosition().getY();
+        double x2 = vesselPosition2.getPosition().getX();
+        double y1 = vesselPosition1.getPosition().getY();
+        double x1 = vesselPosition1.getPosition().getX();
         return Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1));
     }
 }
