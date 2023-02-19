@@ -1,5 +1,8 @@
 package com.oneocean.api.domain;
 
+import com.oneocean.api.vessel.domain.Position;
+import com.oneocean.api.vessel.domain.VesselPosition;
+import com.oneocean.api.vessel.domain.VesselPositions;
 import org.junit.jupiter.api.Test;
 
 import java.time.ZoneId;

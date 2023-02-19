@@ -1,9 +1,9 @@
 package com.oneocean.api.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.oneocean.api.domain.Position;
-import com.oneocean.api.domain.Vessel;
-import com.oneocean.api.domain.VesselPosition;
+import com.oneocean.api.vessel.domain.Position;
+import com.oneocean.api.vessel.domain.Vessel;
+import com.oneocean.api.vessel.domain.VesselPosition;
 import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Repository;
 

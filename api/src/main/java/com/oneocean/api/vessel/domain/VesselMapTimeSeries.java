@@ -1,6 +1,6 @@
-package com.oneocean.api.domain.timeseries;
+package com.oneocean.api.vessel.domain;
 
-import com.oneocean.api.domain.VesselPosition;
+import com.oneocean.api.vessel.domain.VesselPosition;
 
 import java.time.Instant;
 import java.util.TreeMap;

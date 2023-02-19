@@ -1,4 +1,4 @@
-package com.oneocean.api.domain;
+package com.oneocean.api.vessel.domain;
 
 
 import com.oneocean.api.repository.VesselRepository;

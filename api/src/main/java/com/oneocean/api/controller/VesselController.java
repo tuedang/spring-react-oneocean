@@ -1,6 +1,9 @@
 package com.oneocean.api.controller;
 
-import com.oneocean.api.domain.*;
+import com.oneocean.api.vessel.domain.Metric;
+import com.oneocean.api.vessel.domain.Vessel;
+import com.oneocean.api.vessel.domain.VesselPosition;
+import com.oneocean.api.vessel.domain.VesselService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

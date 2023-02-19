@@ -1,4 +1,4 @@
-package com.oneocean.api.domain;
+package com.oneocean.api.vessel.domain;
 
 import lombok.*;
 import org.apache.commons.lang3.Validate;
