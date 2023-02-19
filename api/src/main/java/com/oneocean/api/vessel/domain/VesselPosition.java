@@ -11,8 +11,9 @@ import java.time.Instant;
 @Builder
 @Getter
 @Setter
+@Data
 public class VesselPosition implements Comparable<VesselPosition> {
-    private static final double VESSEL_SIZE_ON_COORDINATE = 0.05;
+    private static final double VESSEL_SIZE_ON_COORDINATE = 0.55;
 
     private Instant time;
     private Vessel vessel;

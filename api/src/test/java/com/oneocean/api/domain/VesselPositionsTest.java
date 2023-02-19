@@ -3,6 +3,7 @@ package com.oneocean.api.domain;
 import com.oneocean.api.vessel.domain.Position;
 import com.oneocean.api.vessel.domain.VesselPosition;
 import com.oneocean.api.vessel.domain.VesselPositions;
+import org.apache.commons.lang3.tuple.Pair;
 import org.junit.jupiter.api.Test;
 
 import java.time.ZoneId;
@@ -47,15 +48,17 @@ public class VesselPositionsTest {
 
     @Test
     public void testSplitAtTime() {
-        vesselPositions.splitAtTime(ZonedDateTime.of(2023, 2, 2, 15, 10, 10, 0, zoneId)
+        Pair<VesselPosition, VesselPositions> pairVesselPositions =vesselPositions.splitAtTime(ZonedDateTime.of(2023, 2, 2, 15, 10, 10, 0, zoneId)
                 .toInstant());
-        List<VesselPosition> vesselPos = vesselPositions.asList();
-        assertThat(vesselPositions.isValid()).isTrue();
+
+        VesselPositions newVesselPositions = pairVesselPositions.getValue();
+        List<VesselPosition> vesselPos = newVesselPositions.asList();
+        assertThat(newVesselPositions.isValid()).isTrue();
         assertThat(vesselPos).hasSize(4);
 
         // split time in the middle shouldn't change the overall information
-        assertThat(vesselPositions.distance()).isEqualTo(11);
-        assertThat(vesselPositions.averageSpeed()).isEqualTo((float)11/6);
+        assertThat(newVesselPositions.distance()).isEqualTo(11);
+        assertThat(newVesselPositions.averageSpeed()).isEqualTo((float)11/6);
     }
 
 }

@@ -1,10 +1,8 @@
 package com.oneocean.api.controller;
 
-import com.oneocean.api.vessel.domain.Metric;
-import com.oneocean.api.vessel.domain.Vessel;
-import com.oneocean.api.vessel.domain.VesselPosition;
-import com.oneocean.api.vessel.domain.VesselService;
+import com.oneocean.api.vessel.domain.*;
 import lombok.AllArgsConstructor;
+import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,5 +31,10 @@ public class VesselController {
     @GetMapping("/metric")
     public Map<Vessel, Metric> metric() {
         return vesselService.metrics();
+    }
+
+    @GetMapping("/collision")
+    public List<Pair<VesselPosition, VesselPosition>> collision() {
+        return vesselService.checkCollision();
     }
 }

@@ -19,7 +19,7 @@ public class VesselPositions {
     private VesselPosition firstItem;
     private VesselPosition lastItem;
 
-    public VesselPositions(List<VesselPosition> vessels) {
+    public VesselPositions(Collection<VesselPosition> vessels) {
         vesselPositionsSet = new TreeSet<>(vessels);
         firstItem = vesselPositionsSet.first();
         lastItem = vesselPositionsSet.last();
@@ -77,7 +77,11 @@ public class VesselPositions {
         return (float) distance / numberOfHours;
     }
 
-    public VesselPositions splitAtTime(Instant atTime) {
+    public boolean canSplitAt(Instant atTime) {
+        return firstItem.isBeforeOrEqual(atTime) && lastItem.isAfterOrEqual(atTime);
+    }
+
+    public Pair<VesselPosition, VesselPositions> splitAtTime(Instant atTime) {
         Validate.isTrue(!atTime.isBefore(firstItem.getTime()));
         Validate.isTrue(!atTime.isAfter(lastItem.getTime()));
 
@@ -92,9 +96,11 @@ public class VesselPositions {
 
         Pair<VesselPosition, VesselPosition> atLine = result.get();
         Validate.notNull(atLine);
-        vesselPositionsSet.add(atLine.getLeft().atTime(atLine.getRight(), atTime));
-        Validate.isTrue(isValid());
-        return this;
+
+        TreeSet<VesselPosition> newVesselPositionTree = new TreeSet<>(vesselPositionsSet);
+        VesselPosition splitAtPosition = atLine.getLeft().atTime(atLine.getRight(), atTime);
+        newVesselPositionTree.add(splitAtPosition);
+        return Pair.of(splitAtPosition, new VesselPositions(newVesselPositionTree));
     }
 
 }

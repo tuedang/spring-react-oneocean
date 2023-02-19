@@ -4,6 +4,7 @@ package com.oneocean.api.vessel.domain;
 import com.oneocean.api.repository.VesselRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -48,6 +49,11 @@ public class VesselService {
             metricMap.put(vessel, metric);
         }
         return metricMap;
+    }
+
+    public List<Pair<VesselPosition, VesselPosition>> checkCollision() {
+        VesselMapTimeSeriesRunner vesselMapTimeSeriesRunner = new VesselMapTimeSeriesRunner(getVesselPositions());
+        return vesselMapTimeSeriesRunner.checkMovingCollision();
     }
 
 }

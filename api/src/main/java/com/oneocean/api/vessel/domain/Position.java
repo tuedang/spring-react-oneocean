@@ -7,6 +7,7 @@ import lombok.*;
 @Builder
 @Getter
 @Setter
+@Data
 public class Position {
     private double x;
     private double y;

@@ -18,6 +18,8 @@ import java.util.Map;
 
 @Repository
 public class VesselRepository {
+    private static final String DATA_SOURCE_FILE = "/data/TestData.json";
+//    private static final String DATA_SOURCE_FILE = "/data/TestData_collision.json";
     private ObjectMapper objectMapper = new ObjectMapper();
 
     private static List<VesselPosition> STATIC_VESSEL_DATA;
@@ -31,7 +33,7 @@ public class VesselRepository {
 
     public List<VesselPosition> parseVesselPositionsData() {
         try {
-            String jsonText = IOUtils.toString(this.getClass().getResourceAsStream("/data/TestData.json"), "UTF-8");
+            String jsonText = IOUtils.toString(this.getClass().getResourceAsStream(DATA_SOURCE_FILE), "UTF-8");
             Map<String, Map> jsonData = objectMapper.readValue(jsonText, HashMap.class);
             List<Map> vessels = (List) jsonData.get("vessels");
 
