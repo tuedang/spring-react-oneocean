@@ -82,4 +82,15 @@ public class VesselPosition implements Comparable<VesselPosition> {
     public boolean isIntersectWith(VesselPosition with) {
         return distanceTo(with) < (VESSEL_SIZE_ON_COORDINATE * 2);
     }
+
+    /**
+     * fake function, try to relocate to map
+     * @return
+     */
+    public Position getCoordinate() {
+        double longitude0 = -122.419; // x
+        double latitude0 = 37.7749; // y
+        int offset = 1000;
+        return new Position(longitude0 + (position.getX() / offset), latitude0 + (position.getY() / offset));
+    }
 }
