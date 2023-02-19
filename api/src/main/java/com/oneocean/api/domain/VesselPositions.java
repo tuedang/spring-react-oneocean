@@ -9,7 +9,6 @@ import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
 @Getter
@@ -35,7 +34,7 @@ public class VesselPositions {
             return false;
         }
         AtomicBoolean result = new AtomicBoolean(true);
-        loop((before, after) -> {
+        traversal((before, after) -> {
             if (after.getTime().isBefore(before.getTime())) {
                 result.set(false);
             }
@@ -43,21 +42,12 @@ public class VesselPositions {
             if (!Objects.equals(before.getVessel(), after.getVessel())) {
                 result.set(false);
             }
+            return true;
         });
         return result.get();
     }
 
-    public void loop(BiConsumer<VesselPosition, VesselPosition> beforeAfterConsumer) {
-        Iterator<VesselPosition> iterator = vesselPositionsSet.iterator();
-        VesselPosition before = iterator.next();
-        while (iterator.hasNext()) {
-            VesselPosition after = iterator.next();
-            beforeAfterConsumer.accept(before, after);
-            before = after;
-        }
-    }
-
-    public void loopBreak(BiFunction<VesselPosition, VesselPosition, Boolean> beforeAfterFunction) {
+    public void traversal(BiFunction<VesselPosition, VesselPosition, Boolean> beforeAfterFunction) {
         Iterator<VesselPosition> iterator = vesselPositionsSet.iterator();
         VesselPosition before = iterator.next();
         while (iterator.hasNext()) {
@@ -92,7 +82,7 @@ public class VesselPositions {
         Validate.isTrue(!atTime.isAfter(lastItem.getTime()));
 
         AtomicReference<Pair<VesselPosition, VesselPosition>> result = new AtomicReference<>();
-        loopBreak((before, after) -> {
+        traversal((before, after) -> {
             if (before.isBeforeOrEqual(atTime) && after.isAfterOrEqual(atTime)) {
                 result.set(Pair.of(before, after));
                 return false;
