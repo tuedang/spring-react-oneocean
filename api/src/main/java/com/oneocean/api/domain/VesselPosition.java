@@ -12,7 +12,7 @@ import java.time.Instant;
 @Getter
 @Setter
 public class VesselPosition implements Comparable<VesselPosition> {
-    private static final double VESSEL_SIZE_ON_COORDINATE = 0.01;
+    private static final double VESSEL_SIZE_ON_COORDINATE = 0.05;
 
     private Instant time;
     private Vessel vessel;
@@ -21,6 +21,22 @@ public class VesselPosition implements Comparable<VesselPosition> {
     @Override
     public int compareTo(VesselPosition o) {
         return time.compareTo(o.time);
+    }
+
+    public boolean isBeforeOrEqual(VesselPosition o) {
+        return !time.isAfter(o.time);
+    }
+
+    public boolean isAfterOrEqual(VesselPosition o) {
+        return !time.isBefore(o.time);
+    }
+
+    public boolean isBeforeOrEqual(Instant atTime) {
+        return !time.isAfter(atTime);
+    }
+
+    public boolean isAfterOrEqual(Instant atTime) {
+        return !time.isBefore(atTime);
     }
 
     public double distanceTo(VesselPosition o) {

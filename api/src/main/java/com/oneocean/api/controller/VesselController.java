@@ -23,7 +23,7 @@ public class VesselController {
     }
 
     @GetMapping("/group")
-    public VesselPositions getVesselGroup() {
+    public Map<Vessel, List<VesselPosition>> getVesselGroup() {
         return vesselService.groupByVessel();
     }
 

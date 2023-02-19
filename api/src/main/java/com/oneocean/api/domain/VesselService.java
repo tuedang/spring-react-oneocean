@@ -1,10 +1,9 @@
 package com.oneocean.api.domain;
 
 
-import com.oneocean.api.domain.calc.DistanceCalculator;
-import com.oneocean.api.domain.calc.SpeedCalculator;
 import com.oneocean.api.repository.VesselRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.Validate;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -23,29 +22,28 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class VesselService {
     private final VesselRepository vesselRepository;
-    DistanceCalculator distanceCalculator = new DistanceCalculator();
-    SpeedCalculator speedCalculator = new SpeedCalculator();
 
     public List<VesselPosition> getVesselPositions() {
         return vesselRepository.getVesselPositions();
     }
 
-    public VesselPositions groupByVessel() {
+    public Map<Vessel, List<VesselPosition>> groupByVessel() {
         Map<Vessel, List<VesselPosition>> vesselPositionMap = getVesselPositions()
                 .stream()
                 .collect(Collectors.groupingBy(VesselPosition::getVessel, HashMap::new, Collectors.toCollection(ArrayList::new)));
-        return new VesselPositions(vesselPositionMap);
+        return vesselPositionMap;
     }
 
     public Map<Vessel, Metric> metrics() {
-        VesselPositions vesselPositions = groupByVessel();
+        Map<Vessel, List<VesselPosition>> vesselPositions = groupByVessel();
 
         Map<Vessel, Metric> metricMap = new HashMap<>();
-        for (Vessel vessel : vesselPositions.getVesselPositionsMap().keySet()) {
-            TreeSet<VesselPosition> vesselPos = vesselPositions.getVesselPositionsMap().get(vessel);
+        for (Vessel vessel : vesselPositions.keySet()) {
+            VesselPositions vesselPositionsSet = new VesselPositions(vesselPositions.get(vessel));
+            Validate.isTrue(vesselPositionsSet.isValid());
             Metric metric = Metric.builder()
-                    .totalDistance(distanceCalculator.calculate(vesselPos).doubleValue())
-                    .averageSpeed(speedCalculator.averageSpeed(vesselPos).doubleValue())
+                    .totalDistance(vesselPositionsSet.distance())
+                    .averageSpeed(vesselPositionsSet.averageSpeed())
                     .build();
             metricMap.put(vessel, metric);
         }
