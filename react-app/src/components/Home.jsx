@@ -39,7 +39,7 @@ export default class Home extends React.Component {
     render() {
         return (
             <div className="container">
-                <h1>Heatmap</h1>
+                <h1>Vessel Map</h1>
                 <div style={{position: 'relative', 'paddingBottom': '56.25%'}}>
                     <MapContainer onBoundsChanged={this.handleOnMapBoundsChanged}
                                   heatmapPositions={this.state.heatmapPositions}/>

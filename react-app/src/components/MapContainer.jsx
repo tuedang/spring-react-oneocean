@@ -1,5 +1,5 @@
 import React from 'react';
-import {GoogleApiWrapper, HeatMap, InfoWindow, Map, Marker} from 'google-maps-react';
+import {GoogleApiWrapper, HeatMap, InfoWindow, Map, Marker, Polyline} from 'google-maps-react';
 
 const mapStyles = {
     width: '100%',
@@ -80,7 +80,7 @@ export class MapContainer extends React.Component {
         return (
             <Map
                 google={this.props.google}
-                zoom={17}
+                zoom={13}
                 clickableIcons={true}
                 onDragend={!this.state.isForm ? this.handleBoundsChange : undefined}
                 onZoomChanged={!this.state.isForm ? this.handleBoundsChange : undefined}
@@ -97,6 +97,13 @@ export class MapContainer extends React.Component {
                         position={this.props.heatmapPositions} // fixme: bug with HeatMap component
                         radius={20}
                     /> : null
+                }
+                {
+                    <Polyline
+                        path={this.props.heatmapPositions}
+                        strokeColor="#0000FF"
+                        strokeOpacity={0.8}
+                        strokeWeight={2} />
                 }
                 {this.state.markers.map((marker, index) => (
                     <Marker
