@@ -19,13 +19,12 @@ public class VesselCollision {
     private VesselPosition centerPosition;
 
     public VesselCollision summary() {
-        long total = vesselPosition1.getTime().toEpochMilli() + vesselPosition2.getTime().toEpochMilli();
         centerPosition = VesselPosition.builder()
                 .vessel(new Vessel(String.format("%s-%s", vesselPosition1.getVessel().getName(), vesselPosition2.getVessel().getName())))
-                .time(Instant.ofEpochMilli(total/2))
+                .time(Instant.ofEpochMilli((vesselPosition1.getTime().toEpochMilli() + vesselPosition2.getTime().toEpochMilli()) / 2))
                 .position(Position.builder()
-                        .x((vesselPosition1.getPosition().getX()+ vesselPosition2.getPosition().getX())/2)
-                        .y((vesselPosition1.getPosition().getY()+ vesselPosition2.getPosition().getY())/2)
+                        .x((vesselPosition1.getPosition().getX() + vesselPosition2.getPosition().getX()) / 2)
+                        .y((vesselPosition1.getPosition().getY() + vesselPosition2.getPosition().getY()) / 2)
                         .build())
                 .build();
         return this;

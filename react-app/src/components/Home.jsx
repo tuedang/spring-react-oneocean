@@ -34,6 +34,7 @@ export default class Home extends React.Component {
         const params = {swLat, swLng, neLat, neLng};
         axios.get('http://localhost:8080/api/vessels/collision', {params}).then(response => {
             const positions = response.data.map(x => {
+                //centerPosition vesselPosition1 vesselPosition1
                 var cp = x.centerPosition;
                 return {
                     lng: cp.coordinate.x,
