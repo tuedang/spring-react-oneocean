@@ -8,6 +8,8 @@ import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -54,7 +56,8 @@ public class VesselService {
 
     public List<Pair<VesselPosition, VesselPosition>> checkCollision() {
         VesselMapTimeSeriesRunner vesselMapTimeSeriesRunner = new VesselMapTimeSeriesRunner(getVesselPositions());
-        return vesselMapTimeSeriesRunner.checkMovingCollision();
+        Duration duration = Duration.of(20, ChronoUnit.SECONDS);
+        return vesselMapTimeSeriesRunner.checkMovingCollision(duration);
     }
 
 }

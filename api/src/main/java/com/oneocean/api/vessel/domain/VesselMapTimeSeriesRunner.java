@@ -17,14 +17,13 @@ public class VesselMapTimeSeriesRunner {
         vesselMapTimeSeries = new VesselMapTimeSeries(allVessels);
     }
 
-    public List<Pair<VesselPosition, VesselPosition>> checkMovingCollision() {
+    public List<Pair<VesselPosition, VesselPosition>> checkMovingCollision(Duration duration) {
         log.info("Start collision checking");
         List<Pair<VesselPosition, VesselPosition>> allCollisions = new ArrayList<>();
         Instant startTime = vesselMapTimeSeries.getStartTime();
         Instant endTime = vesselMapTimeSeries.getEndTime();
 
         Instant moveAtTime = startTime;
-        Duration duration = Duration.of(1, ChronoUnit.SECONDS);
         while (moveAtTime.isBefore(endTime)) {
             log.info("Check at time {}", moveAtTime);
 
