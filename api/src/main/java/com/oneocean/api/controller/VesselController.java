@@ -1,6 +1,7 @@
 package com.oneocean.api.controller;
 
 import com.oneocean.api.dto.VesselCollision;
+import com.oneocean.api.service.VesselService;
 import com.oneocean.api.vessel.domain.*;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.tuple.Pair;

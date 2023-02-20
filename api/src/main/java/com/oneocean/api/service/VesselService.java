@@ -1,7 +1,8 @@
-package com.oneocean.api.vessel.domain;
+package com.oneocean.api.service;
 
 
 import com.oneocean.api.repository.VesselRepository;
+import com.oneocean.api.vessel.domain.*;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.tuple.Pair;
