@@ -29,7 +29,7 @@ export class MapContainer extends React.Component {
             ],
             clickedMap: '',
             boundsChanged: '',
-            isForm: !this.props.vesselPositions,
+            isForm: !this.props.heatmapPositions && !this.props.vesselPositions,
         };
         this.mapClicked = this.mapClicked.bind(this);
         this.handleBoundsChange = this.handleBoundsChange.bind(this);
@@ -97,6 +97,14 @@ export class MapContainer extends React.Component {
                     lng: -122.41942048072815
                 }}
                 style={mapStyles}>
+                {
+                    this.props.heatmapPositions !== undefined ? <HeatMap
+                        opacity={10}
+                        positions={this.props.heatmapPositions}
+                        position={this.props.heatmapPositions}
+                        radius={20}
+                    /> : null
+                }
                 {
                     Object.entries(this.props.vesselPositions).map(([vessel, positions]) => {
                         return positions.map((marker, index) => {

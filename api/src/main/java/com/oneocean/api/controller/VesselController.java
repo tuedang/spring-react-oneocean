@@ -1,5 +1,6 @@
 package com.oneocean.api.controller;
 
+import com.oneocean.api.dto.VesselCollision;
 import com.oneocean.api.vessel.domain.*;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.tuple.Pair;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
@@ -34,7 +36,15 @@ public class VesselController {
     }
 
     @GetMapping("/collision")
-    public List<Pair<VesselPosition, VesselPosition>> collision() {
-        return vesselService.checkCollision();
+    public List<VesselCollision> collision() {
+        List<Pair<VesselPosition, VesselPosition>> collisions = vesselService.checkCollision();
+        return collisions.stream()
+                .map(pair -> VesselCollision.builder()
+                        .vesselPosition1(pair.getLeft())
+                        .vesselPosition2(pair.getRight())
+                        .build()
+                        .summary())
+                .collect(Collectors.toList());
+
     }
 }
