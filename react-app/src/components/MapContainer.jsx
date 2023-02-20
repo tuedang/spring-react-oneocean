@@ -6,6 +6,13 @@ const mapStyles = {
     height: '100%',
 };
 
+const vesselsStyles = [
+    '#B000FA',
+    '#0A00CD',
+    '#0BC0AB',
+    '#ABCF0B',
+];
+
 export class MapContainer extends React.Component {
     constructor(props) {
         super(props);
@@ -22,7 +29,7 @@ export class MapContainer extends React.Component {
             ],
             clickedMap: '',
             boundsChanged: '',
-            isForm: !this.props.heatmapPositions,
+            isForm: !this.props.heatmapPositions && !this.props.vesselPositions,
         };
         this.mapClicked = this.mapClicked.bind(this);
         this.handleBoundsChange = this.handleBoundsChange.bind(this);
@@ -99,11 +106,15 @@ export class MapContainer extends React.Component {
                     /> : null
                 }
                 {
-                    <Polyline
-                        path={this.props.heatmapPositions}
-                        strokeColor="#0000FF"
-                        strokeOpacity={0.8}
-                        strokeWeight={2} />
+                    Object.entries(this.props.vesselPositions).map(([vessel, positions]) => {
+                        return (
+                            <Polyline
+                                path={positions}
+                                strokeColor={vesselsStyles[vessel]}
+                                strokeOpacity={0.9}
+                                strokeWeight={3} />
+                        )
+                    })
                 }
                 {this.state.markers.map((marker, index) => (
                     <Marker
