@@ -29,7 +29,7 @@ export class MapContainer extends React.Component {
             ],
             clickedMap: '',
             boundsChanged: '',
-            isForm: !this.props.heatmapPositions && !this.props.vesselPositions,
+            isForm: !this.props.vesselPositions,
         };
         this.mapClicked = this.mapClicked.bind(this);
         this.handleBoundsChange = this.handleBoundsChange.bind(this);
@@ -63,7 +63,7 @@ export class MapContainer extends React.Component {
                 markers: [
                     {
                         title: "",
-                        name: "Residence",
+                        name: "Vessels",
                         position: {lat: position.lat, lng: position.lng}
                     }
                 ]
@@ -98,12 +98,22 @@ export class MapContainer extends React.Component {
                 }}
                 style={mapStyles}>
                 {
-                    this.props.heatmapPositions !== undefined ? <HeatMap
-                        opacity={10}
-                        positions={this.props.heatmapPositions}
-                        position={this.props.heatmapPositions} // fixme: bug with HeatMap component
-                        radius={20}
-                    /> : null
+                    Object.entries(this.props.vesselPositions).map(([vessel, positions]) => {
+                        return positions.map((marker, index) => {
+                            return (
+                                <Marker
+                                    key={index}
+                                    title='{marker.title}'
+                                    name={marker.name}
+                                    time={marker.time}
+                                    posx={marker.originPosition.x}
+                                    posy={marker.originPosition.y}
+                                    position={marker}
+                                    onClick={this.onMarkerClick}
+                                />
+                            )
+                        });
+                    })
                 }
                 {
                     Object.entries(this.props.vesselPositions).map(([vessel, positions]) => {
@@ -130,7 +140,9 @@ export class MapContainer extends React.Component {
                             visible={this.state.showingInfoWindow}
                             onClose={this.onClose}>
                     <div>
-                        <h4>{this.state.selectedPlace.name}</h4>
+                        <h9>{this.state.selectedPlace.name}</h9>
+                        <h6>{this.state.selectedPlace.time}</h6>
+                        <h6>{this.state.selectedPlace.posx},{this.state.selectedPlace.posy}</h6>
                     </div>
                 </InfoWindow>
             </Map>
