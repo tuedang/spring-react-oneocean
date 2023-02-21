@@ -7,14 +7,6 @@ The React App project files are located under the '/react-app' directory.
 
 ## Getting Started
 
-### Requirements
-For building and running the application you need:
-
-- [JDK 11](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
-- [Maven 3](https://maven.apache.org/download.cgi)
-- [Node.js](https://nodejs.org/en/download/)
-- [MySQL 8](https://dev.mysql.com/downloads/mysql/)
-
 ### Clone
 To get started you can simply clone this repository using git:
 ```
@@ -39,6 +31,6 @@ To run the React frontend app, run from the `react-app` root folder:
 
 The app will be available on [http://localhost:3000](http://localhost:3000)
 
-**Google**:
+### Result on the map
+![vessles map](imgs/vessels_map.png)
 
-Create a [Google API Key](https://developers.google.com/maps/documentation/javascript/get-api-key) and replace REACT_APP_GOOGLE_API_KEY on `/react-app/.env`.
