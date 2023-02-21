@@ -1,8 +1,5 @@
-package com.oneocean.api.domain;
+package com.oneocean.api.vessel.domain;
 
-import com.oneocean.api.vessel.domain.Position;
-import com.oneocean.api.vessel.domain.VesselPosition;
-import com.oneocean.api.vessel.domain.VesselPositions;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.jupiter.api.Test;
 

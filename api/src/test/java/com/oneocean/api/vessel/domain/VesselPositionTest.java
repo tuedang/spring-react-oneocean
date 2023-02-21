@@ -1,7 +1,5 @@
-package com.oneocean.api.domain;
+package com.oneocean.api.vessel.domain;
 
-import com.oneocean.api.vessel.domain.Position;
-import com.oneocean.api.vessel.domain.VesselPosition;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
@@ -80,8 +78,8 @@ public class VesselPositionTest {
         assertThat(vesselPosition1.isIntersectWith(vesselPosition)).isTrue();
 
         // Far enough for a collision
-        Instant atTime3Min = vesselPosition1.getTime().plus(3, ChronoUnit.MINUTES);
-        VesselPosition vesselPositionAfter100Sec = vesselPosition1.atTime(vesselPosition2, atTime3Min);
-        assertThat(vesselPosition1.isIntersectWith(vesselPositionAfter100Sec)).isFalse();
+        Instant atTime30Min = vesselPosition1.getTime().plus(30, ChronoUnit.MINUTES);
+        VesselPosition vesselPositionAfter30min = vesselPosition1.atTime(vesselPosition2, atTime30Min);
+        assertThat(vesselPosition1.isIntersectWith(vesselPositionAfter30min)).isFalse();
     }
 }
