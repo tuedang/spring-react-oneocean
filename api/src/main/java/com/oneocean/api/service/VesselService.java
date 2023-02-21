@@ -1,6 +1,7 @@
 package com.oneocean.api.service;
 
 
+import com.oneocean.api.dto.Metric;
 import com.oneocean.api.repository.VesselRepository;
 import com.oneocean.api.vessel.domain.*;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.oneocean.api.vessel.domain;
+package com.oneocean.api.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

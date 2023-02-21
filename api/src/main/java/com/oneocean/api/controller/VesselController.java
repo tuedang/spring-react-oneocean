@@ -1,5 +1,6 @@
 package com.oneocean.api.controller;
 
+import com.oneocean.api.dto.Metric;
 import com.oneocean.api.dto.VesselCollision;
 import com.oneocean.api.service.VesselService;
 import com.oneocean.api.vessel.domain.*;
